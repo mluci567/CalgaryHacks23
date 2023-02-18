@@ -1,22 +1,7 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 const Layout = () => {
-  return (
-    <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Login</Link>
-          </li>
-          <li>
-            <Link to="dashboard">Home</Link>
-          </li>
-        </ul>
-      </nav>
-
-      <Outlet />
-    </>
-  );
+  return <Outlet />;
 };
 
 export default Layout;

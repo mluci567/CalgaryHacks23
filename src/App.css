@@ -1,5 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Gloock&display=swap");
+
 html,
 body {
   margin: 0;
   padding: 0;
+}
+
+.sidebarItem * {
+  padding: 12px;
+  margin: 0;
+  font-family: "Gloock", cursive;
+}
+
+.sidebarItem {
+  border: 1px solid #ccc;
+  width: 95%;
+  color: #fff;
+  margin-top: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sidebarItem:hover {
+  background-color: #fff;
+  color: #0f5474;
+  transition: 0.3s;
 }

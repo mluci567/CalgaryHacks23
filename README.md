@@ -60,4 +60,4 @@ Mount Royal Calgary Hacks Repository
 
 ### Make a Game Inspired by the word "Cycle"
 
-https://docs.google.com/presentation/d/1P03IoWHlhKRKyZoDKIUJPZVJAPFfYMFX--I0XPSHsAM/edit#slide=id.g1f287b0ef44_0_0
+<https://docs.google.com/presentation/d/1P03IoWHlhKRKyZoDKIUJPZVJAPFfYMFX--I0XPSHsAM/edit#slide=id.g1f287b0ef44_0_0>

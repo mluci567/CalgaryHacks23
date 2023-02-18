@@ -1,11 +1,11 @@
 // import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../Login.css";
 
 const Register = () => {
-  const [formData, setFormData] = useState({});
+  // const [formData, setFormData] = useState({});
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -22,14 +22,14 @@ const Register = () => {
   };
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+    //   const { name, value } = event.target;
+    //   setFormData((prevFormData) => ({
+    //     ...prevFormData,
+    //     [name]: value,
+    //   }));
   };
   return (
-    <div>
+    <div className="register">
       <div className="leftSide">
         <div className="centered">
           <h1>Find Your Space.</h1>
@@ -87,7 +87,10 @@ const Register = () => {
               </option>
             </select>
 
-            <button type="submit">Login</button>
+            <button type="submit">Register</button>
+            <Link to="/login">
+              <button>Back to Login</button>
+            </Link>
           </form>
         </div>
       </div>

@@ -3,7 +3,14 @@
 .login {
   background-image: url("https://images.ctfassets.net/2htm8llflwdx/6hoOm7A93atP9kgU9iV2hP/2b66034c9c1dfaf3c58d0830177b2e2d/Shorelight_Study_Tips.jpg");
   background-repeat: no-repeat;
-  background-size: 50%;
+  background-size: auto;
+  background-position: right;
+}
+
+.register {
+  background-image: url("https://www.vunela.com/wp-content/uploads/2021/04/annie-spratt-QckxruozjRg-unsplash-scaled-1200x675-cropped.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   background-position: right;
 }
 
@@ -83,10 +90,11 @@ p {
 .centered button {
   padding: 10px;
   margin: 0;
-  font-size: 30px;
+  font-size: 24px;
   color: rgba(255, 255, 255, 0.5);
   font-family: sans-serif;
-  display: block;
+  display: inline-block;
+  margin-right: 10px;
   background-color: #0f5474;
   border: 0;
   border-bottom: 1px solid #fff;

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import "../Login.css";
 
-const Login = () => {
+const Register = () => {
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
 
@@ -29,14 +29,30 @@ const Login = () => {
     }));
   };
   return (
-    <div className="login">
+    <div>
       <div className="leftSide">
         <div className="centered">
-          <h1>Let's start studying.</h1>
-          <p>Find a space to study that works for you.</p>
+          <h1>Find Your Space.</h1>
+          <p>Get ready to get more done.</p>
           <br />
 
           <form onSubmit={handleSubmit}>
+            <label htmlFor="email">First Name</label>
+            <input
+              type="text"
+              name="firstName"
+              id="firstName"
+              placeholder="First Name"
+              onChange={handleChange}
+            />
+            <label htmlFor="email">Last Name</label>
+            <input
+              type="text"
+              name="lastName"
+              id="lastName"
+              placeholder="Last Name"
+              onChange={handleChange}
+            />
             <label htmlFor="email">Email</label>
             <input
               type="email"
@@ -54,6 +70,23 @@ const Login = () => {
               onChange={handleChange}
             />
 
+            <label htmlFor="institution">Institution</label>
+            <select
+              name="institution"
+              id="institution"
+              placeholder="Institution"
+              onChange={handleChange}
+            >
+              <option disabled selected value="">
+                Select an Institution
+              </option>
+              <option value="mru">Mount Royal University, Alberta</option>
+              <option value="uofc">University of Calgary, Alberta</option>
+              <option value="audi">
+                Southern Alberta Institute of Technology
+              </option>
+            </select>
+
             <button type="submit">Login</button>
           </form>
         </div>
@@ -62,4 +95,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

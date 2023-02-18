@@ -1,6 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Gloock&display=swap");
 
+.login {
+  background-image: url("https://images.ctfassets.net/2htm8llflwdx/6hoOm7A93atP9kgU9iV2hP/2b66034c9c1dfaf3c58d0830177b2e2d/Shorelight_Study_Tips.jpg");
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: right;
+}
+
 .leftSide {
+  z-index: 1;
   width: 50%;
   background-color: #0f5474;
   font-size: 20px;
@@ -31,7 +39,8 @@ p {
   display: none;
 }
 
-.centered input {
+.centered input,
+.centered select {
   padding: 10px;
   margin: 0;
   font-size: 24px;
@@ -44,6 +53,16 @@ p {
   transition: 0.3s;
   width: 80%;
   margin-bottom: 10px;
+}
+
+.centered select {
+  width: 84%;
+}
+
+.rightSide {
+  position: absolute;
+  right: 0;
+  width: 50%;
 }
 
 .centered input:focus {

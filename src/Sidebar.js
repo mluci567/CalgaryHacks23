@@ -69,9 +69,10 @@ function Sidebar() {
             <p>Today is {formattedDay}.</p>
             <hr />
           </header>
-          <SidebarItem title="Find a Room" />
-          <SidebarItem title="Find a Group" />
-          <SidebarItem title="Create a Group" />
+          <SidebarItem title="View Your Campus" onClick="view-campus" />
+          <SidebarItem title="Find a Room" onClick="find-room" />
+          <SidebarItem title="Find a Group" onClick="find-group" />
+          <SidebarItem title="Create a Group" onClick="create-group" />
         </div>
         <footer>
           <Link to="feedback">

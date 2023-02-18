@@ -22,6 +22,19 @@ body {
   transition: 0.3s;
 }
 
+.errorLoggingIn {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  color: #cc0040;
+}
+
+.errorLoggingIn svg {
+  margin-right: 5px;
+  filter: invert(14%) sepia(36%) saturate(7121%) hue-rotate(323deg)
+    brightness(105%) contrast(137%);
+}
+
 .sidebarItem:hover {
   background-color: #fff;
   color: #0f5474;

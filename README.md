@@ -84,9 +84,9 @@ A system that integrates with universities room booking services that allows for
 - Whiteboards
 - blackboards
 - Accessible
-- Wheelchair accessible
-- Sensory stimulus
-- Number of people in area
+  - Wheelchair accessible
+  - Sensory stimulus
+  - Number of people in area
 - Based on Feedback from users
 - Number of seats
 - Private area
@@ -95,9 +95,9 @@ A system that integrates with universities room booking services that allows for
 - Hours(does space close at a different time than campus)
 - Amount of people in the area
 - Amenities nearby
-- Washrooms
-- food
-- Parking
-- transit
+  - Washrooms
+  - food
+  - Parking
+  - transit
 
 ### How we made it

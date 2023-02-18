@@ -2,7 +2,7 @@
 
 .leftSide {
   width: 50%;
-  background-color: #89cff0;
+  background-color: #0f5474;
   font-size: 20px;
   display: flex;
   padding-left: 12px;
@@ -34,26 +34,27 @@ p {
 .centered input {
   padding: 10px;
   margin: 0;
-  font-size: 30px;
+  font-size: 24px;
   color: #fff;
   font-family: sans-serif;
   display: block;
-  background-color: #89cff0;
+  background-color: #0f5474;
   border: none;
-  border-bottom: 1px solid #fff;
-  transition: 0.1s;
+  border-bottom: 1px solid #3377aa;
+  transition: 0.3s;
+  width: 80%;
   margin-bottom: 10px;
 }
 
 .centered input:focus {
   outline: none;
-  border: 4px solid #fff;
-  transition: 0.1s;
+  border-bottom: 1px solid #fff;
+  transition: 0.3s;
 }
 
 .centered input:hover {
-  border-bottom: 4px solid #fff;
-  transition: 0.1s;
+  border-bottom: 1px solid #fff;
+  transition: 0.3s;
 }
 
 .centered input::placeholder {
@@ -64,21 +65,20 @@ p {
   padding: 10px;
   margin: 0;
   font-size: 30px;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.5);
   font-family: sans-serif;
   display: block;
-  background-color: #89cff0;
-  border: 1px solid #fff;
+  background-color: #0f5474;
+  border: 0;
+  border-bottom: 1px solid #fff;
   margin-top: 20px;
-  border-radius: 12px;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 
 .centered button:hover {
-  background-color: #fff;
-  color: #89cff0;
   cursor: pointer;
-  transition: 0.5s;
+  color: rgba(255, 255, 255, 1);
+  transition: 0.3s;
 }
 
 @media (max-width: 1150px) {

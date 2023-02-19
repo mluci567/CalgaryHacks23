@@ -6,7 +6,7 @@ import { useState } from "react";
 const FindRoom = () => {
   useOutletContext();
 
-  const [filters, setFilters] = useState([""]);
+  const [filters, setFilters] = useState(["food"]);
   const [sort, setSort] = useState("name");
 
   const subcomponents = [
@@ -22,7 +22,7 @@ const FindRoom = () => {
       adjustablelighting: true,
       whiteboard: true,
       outlets: true,
-      food: true,
+      food: false,
       washroom: false,
       parking: false,
       transit: false,
@@ -77,7 +77,7 @@ const FindRoom = () => {
 
   console.log(
     sortedSubcomponents
-      //   .filter((subcomponent) => filters.includes(subcomponent.filter))
+      .filter((subcomponent) => filters.includes(subcomponent.filter))
       .map((subcomponent) => <RoomData {...subcomponent} />)
   );
 
@@ -91,7 +91,7 @@ const FindRoom = () => {
       />
       <div className="roomList">
         {sortedSubcomponents
-          //   .filter((subcomponent) => filters.includes(subcomponent.filter))
+          .filter((subcomponent) => filters.includes(subcomponent.filter))
           .map((subcomponent) => (
             <RoomData {...subcomponent} />
           ))}

@@ -40,3 +40,13 @@ body {
   color: #0f5474;
   transition: 0.3s;
 }
+
+#root {
+  display: flex;
+}
+
+.FindRoom {
+  float: right;
+  flex: 1;
+  overflow: auto;
+}

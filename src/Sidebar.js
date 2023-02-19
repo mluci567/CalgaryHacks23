@@ -1,12 +1,21 @@
 // import axios from "axios";
 import "./Sidebar.css";
 import SidebarItem from "./SidebarItem";
+import { useEffect, useState } from "react";
 
 import settingsIcon from "./assets/settings.png";
 import { Link } from "react-router-dom";
 
 function Sidebar() {
   let formattedDay = getFormattedDay();
+  let timeOfDay = getTimeOfDay();
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    if (localStorage.getItem("username")) {
+      setUserName(localStorage.getItem("username"));
+    }
+  }, []);
 
   function getFormattedDay() {
     const days = [
@@ -60,12 +69,26 @@ function Sidebar() {
     return `${day}, ${month} ${dayOfMonth}${suffix}`;
   }
 
+  function getTimeOfDay() {
+    const date = new Date();
+    const hour = date.getHours();
+    if (hour < 12 && hour > 5) {
+      return "morning";
+    } else if (hour < 18) {
+      return "afternoon";
+    } else {
+      return "evening";
+    }
+  }
+
   return (
     <div>
       <div className="sidebar">
         <div className="container">
           <header>
-            <h1>Good morning Matthew.</h1>
+            <h1>
+              Good {timeOfDay} {userName.split(" ")[0]}.
+            </h1>
             <p>Today is {formattedDay}.</p>
             <hr />
           </header>

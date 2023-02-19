@@ -25,7 +25,6 @@ const Login = () => {
       ></path>
     </svg>
   );
-  //   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -33,6 +32,11 @@ const Login = () => {
     const user = userData.find((user) => user.email === email);
     if (user && user.password === password) {
       console.log("Logged in successfully!");
+
+      localStorage.setItem("username", user.name);
+      localStorage.setItem("email", user.email);
+      localStorage.setItem("institution", user.institution);
+
       navigate("/dashboard");
     } else {
       setErrorMessage("Incorrect username or password");

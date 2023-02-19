@@ -1,3 +1,5 @@
+// ALL ICONS FROM https://www.flaticon.com/
+
 import foodIcon from "./assets/cutlery.png";
 import disabledIcon from "./assets/disabled.png";
 import energyIcon from "./assets/energy.png";

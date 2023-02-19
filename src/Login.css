@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Gloock&display=swap");
 
 .login {
+  /* image from https://shorelight.com/student-stories/21-best-study-tips-for-final-exams/ */
   background-image: url("https://images.ctfassets.net/2htm8llflwdx/6hoOm7A93atP9kgU9iV2hP/2b66034c9c1dfaf3c58d0830177b2e2d/Shorelight_Study_Tips.jpg");
   background-repeat: no-repeat;
   background-size: auto;
@@ -8,6 +9,7 @@
 }
 
 .register {
+  /* image from https://monitor.icef.com/2021/04/what-about-the-20-million-students-that-didnt-study-abroad-last-year/annie-spratt-qckxruozjrg-unsplash-2/ */
   background-image: url("https://www.vunela.com/wp-content/uploads/2021/04/annie-spratt-QckxruozjRg-unsplash-scaled-1200x675-cropped.jpg");
   background-repeat: no-repeat;
   background-size: cover;

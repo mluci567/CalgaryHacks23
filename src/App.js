@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import FindRoom from "./pages/FindRoom";
+import ViewCampus from "./pages/ViewCampus";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Login />} />
           <Route path="dashboard" element={<Home />}>
+            <Route path="view-campus" element={<ViewCampus />} />
             <Route path="find-room" element={<FindRoom />} />
             <Route path="find-group" element={<Home />} />
             <Route path="create-group" element={<Home />} />

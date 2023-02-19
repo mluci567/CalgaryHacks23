@@ -16,7 +16,7 @@ const Register = () => {
 
   const errorIcon = (
     <svg
-      class="octicon octicon-alert mr-2"
+      className="octicon octicon-alert mr-2"
       viewBox="0 0 16 16"
       version="1.1"
       width="16"

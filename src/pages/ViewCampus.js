@@ -25,7 +25,6 @@ const ViewCampus = () => {
         options={{
           center: { lat: 51.01225, lng: -114.12779 },
           zoom: 19.75,
-          tilt: 100,
           heading:90,
           mapId:'897cac78f7867e60',
         }}

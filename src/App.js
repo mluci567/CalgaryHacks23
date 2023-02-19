@@ -6,6 +6,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import FindRoom from "./pages/FindRoom";
 import ViewCampus from "./pages/ViewCampus";
+import Feedback from "./pages/Feedback";
+import FindGroup from "./pages/FindGroup";
+import CreateGroup from "./pages/CreateGroup";
 
 function App() {
   return (
@@ -16,11 +19,12 @@ function App() {
           <Route path="dashboard" element={<Home />}>
             <Route path="view-campus" element={<ViewCampus />} />
             <Route path="find-room" element={<FindRoom />} />
-            <Route path="find-group" element={<Home />} />
-            <Route path="create-group" element={<Home />} />
+            <Route path="find-group" element={<FindGroup />} />
+            <Route path="create-group" element={<CreateGroup />} />
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="feedback" element={<Feedback />} />
 
           <Route path="*" element={<h1>404: Not Found</h1>} />
         </Route>

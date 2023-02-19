@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data</title>
+  </head>
+  <body>
+    <h1>Data</h1>
+    <h2>Rooms</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Room</th>
+          <th>Floor</th>
+          <th>Type</th>
+          <th>Capacity</th>
+          <th>Hours</th>
+          <th>Accessibility</th>
+          <th>Noise</th>
+          <th>Lighting</th>
+          <th>Whiteboard</th>
+          <th>Outlets</th>
+          <th>Food</th>
+          <th>Washroom</th>
+          <th>Parking</th>
+          <th>Transit</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for room in rooms|sort(attribute='Room Number')|sort(attribute='Floor')|sort(attribute='Type')|sort(attribute='Capacity')|sort(attribute='Hours')|sort(attribute='Accessibility')|sort(attribute='Noise')|sort(attribute='Lighting')|sort(attribute='Whiteboard')|sort(attribute='Outlets')|sort(attribute='Food')|sort(attribute='Washroom')|sort(attribute='Parking')|sort(attribute='Transit') %}
+        <tr>
+          <td>{{ room[0] }}</td>
+          <td>{{ room[3] }}</td>
+          <td>{{ room[2] }}</td>
+          <td>{{ room[1] }}</td>
+          <td>{{ room[4] }}</td>
+          <td>{{ room[5] }}</td>
+          <td>{{ room[6] }}</td>
+          <td>{{ room[7] }}</td>
+          <td>{{ room[8] }}</td>
+          <td>{{ room[9] }}</td>
+          <td>{{ room[10] }}</td>
+          <td>{{ room[11] }}</td>
+          <td>{{ room[12] }}</td>
+          <td>{{ room[13] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <h2>Classes</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Course Number</th>
+          <th>Section</th>
+          <th>CRN</th>
+          <th>Course Title</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for course in classes|sort(attribute='subject')|sort(attribute='course_number')|sort(attribute='section')|sort(attribute='crn') %}
+        <tr>
+          <td>{{ course[0] }}</td>
+          <td>{{ course[1] }}</td>
+          <td>{{ course[2] }}</td>
+          <td>{{ course[3] }}</td>
+          <td>{{ course[4] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

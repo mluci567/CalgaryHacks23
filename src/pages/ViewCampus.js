@@ -32,7 +32,7 @@ const ViewCampus = () => {
 
 
         onMapLoad={(map) => {
-          const georssLayer = new google.maps.KmlLayer({
+          const georssLayer = new window.google.maps.KmlLayer({
             url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1eW-S4Ouzct9qitK6oSt_drCnFh1bGwo&lid=E7TrCQyC9tc",
           });
         
@@ -40,7 +40,7 @@ const ViewCampus = () => {
         }
         
 
-        }}
+        }
       />
     </div>
   );

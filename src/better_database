@@ -1,0 +1,42 @@
+from flask import Flask, render_template
+import sqlite3 as sql
+import openpyxl
+import threading
+
+database = sql.connect('./database/database.db', check_same_thread=False)
+
+app = Flask(__name__)
+
+def get_data(spreadsheet_info):
+    for file_name, table_name in spreadsheet_info:
+        workbook = openpyxl.load_workbook(file_name)
+        worksheet = workbook.worksheets[0]
+        headers = [cell.value for cell in worksheet[1]]
+        column_names = ', '.join(headers)
+        placeholders = ', '.join('?' * len(headers))
+        create_table_query = f"CREATE TABLE IF NOT EXISTS {table_name} ({column_names})"
+        database.execute(create_table_query)
+        for row in worksheet.iter_rows(min_row=2, values_only=True):
+            insert_query = f"INSERT INTO {table_name} ({column_names}) VALUES ({placeholders})"
+            database.execute(insert_query, row)
+        database.commit()  
+        
+    database.close
+
+@app.route('/')
+def load():
+    spreadsheet_info = [('./database/ROOM_CHARACTERISTICS.xlsx', 'rooms'), ('./database/CLASS_INFO.xlsx', 'classes')]
+    t = threading.Thread(target=get_data, args=(spreadsheet_info,))
+    t.start()
+
+    return 'data uploaded successfully'
+
+@app.route('/data')
+def data():
+    rooms = database.execute('SELECT * FROM rooms').fetchall()
+    classes = database.execute('SELECT * FROM classes').fetchall()
+   
+    return render_template('./database/template.html', rooms=rooms, classes=classes)
+
+if __name__ == '__main__':
+    app.run(debug=True)

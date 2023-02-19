@@ -12,6 +12,7 @@ import requests
 import json
 # import wtforms.validators as w 
 
+#create database 
 database = sql.connect('./database/database.db', check_same_thread=False)
 app = Flask(__name__)
 
@@ -41,6 +42,7 @@ class ClassForm(FlaskForm):
     course_title = StringField('Course Title')
 
 class GroupForm(FlaskForm):
+    # used to add new group to database (see add_group)
     name = StringField('Group Name')
     subject = StringField('Subject')
     course = StringField('Course')
@@ -124,6 +126,7 @@ def add_class():
 
 @app.route('/add_group', methods=['GET', 'POST'])
 def add_group():
+    #add new group to database
     form = GroupForm()
     if form.validate_on_submit():
         name = form.name.data
@@ -144,10 +147,9 @@ engine = create_engine('sqlite:///./database/database.db', echo=True)
 Base = declarative_base()
 Session = sessionmaker(bind=engine)
 
-# Item model
 class RoomItem(Base):
+    #item for room database
     __tablename__ = 'rooms'
-
     room = Column(String, primary_key=True)
     floor = Column(Integer)
     type_ = Column(String)
@@ -167,8 +169,8 @@ class RoomItem(Base):
         return f"<Item(room={self.room}, floor='{self.floor}', type_={self.type_}, capacity={self.capacity}, hours={self.hours}, accessibility={self.accessibility}, noise={self.noise}, lighting={self.lighting}, whiteboard={self.whiteboard}, outlets={self.outlets}, food={self.food}, washroom={self.washroom}, parking={self.parking}, transit={self.transit})>"
 
 class ClassItem(Base):
+    #item for class database
     __tablename__ = 'classes'
-
     subject = Column(String, primary_key=True)
     course_number = Column(Integer)
     section = Column(Integer)
@@ -179,8 +181,8 @@ class ClassItem(Base):
         return f"<Item(subject={self.subject}, course_number={self.course_number}, section={self.section}, crn={self.crn}, course_title={self.course_title})>"
 
 class GroupItem(Base):
+    #item for group database
     __tablename__ = 'groups'
-
     name = Column(String, primary_key=True)
     subject = Column(String)
     course = Column(String)
@@ -194,6 +196,7 @@ class GroupItem(Base):
         return f"<Item(name={self.name}, subject={self.subject}, course={self.course}, meet_time={self.meet_time}, is_recurring={self.is_recurring}, max_size={self.max_size}, purpose={self.purpose}, room={self.room})>"
 
 def sort_classes():
+    #sort classes by subject, course number and section
     session = Session.future(True) # define session 
     subject_input = 'this would be user input' 
     course_number_input = 'more input that isnt'
@@ -204,6 +207,7 @@ def sort_classes():
     return results
 
 def sort_rooms():
+    #sort rooms by all attributes
     session = Session()
     result = session.query(RoomItem).filter(RoomItem.floor, RoomItem.room, RoomItem.type_, RoomItem.capacity, RoomItem.hours, RoomItem.accessibility, RoomItem.noise, RoomItem.lighting, RoomItem.whiteboard, RoomItem.outlets, RoomItem.food, RoomItem.washroom, RoomItem.parking, RoomItem.transit)
     session.close()
@@ -211,12 +215,14 @@ def sort_rooms():
     return result 
 
 def sort_groups():
+    #sort groups by all attributes
     session = Session()
     result = session.query(GroupItem.name, GroupItem.subject, GroupItem.course, GroupItem.meet_time, GroupItem.is_recurring, GroupItem.max_size, GroupItem.purpose, GroupItem.room)
     session.close()
     return result
 
 def print_rooms():
+    #print rooms in database on url ??
     with Session() as session:
         rooms = session.query(RoomItem).all()
 

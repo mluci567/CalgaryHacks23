@@ -49,7 +49,7 @@ const RoomSearcher = (props) => {
             <option value="noise">Noise Level</option>
             <option value="access">Accessibility</option>
             <option value="floor">Floor</option>
-            <option value="a">Capacity</option>
+            <option value="capacity">Capacity</option>
           </select>
         </label>
       </div>

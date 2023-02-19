@@ -193,8 +193,6 @@ class GroupItem(Base):
     def __repr__(self):
         return f"<Item(name={self.name}, subject={self.subject}, course={self.course}, meet_time={self.meet_time}, is_recurring={self.is_recurring}, max_size={self.max_size}, purpose={self.purpose}, room={self.room})>"
 
-
-
 def sort_classes():
     session = Session.future(True) # define session 
     subject_input = 'this would be user input' 
@@ -225,6 +223,8 @@ def print_rooms():
     data = [room.to_dict() for room in rooms]
     json_data = json.dumps(data)
 
+    print(json_data)
+
     # Send an HTTP POST request to the server hosting the URL
     url = '/items' #http://localhost:3000/
     headers = {'Content-type': 'application/json'}
@@ -235,9 +235,6 @@ def print_rooms():
     else:
         print(f'Error posting data: {response.content}')
     return 
-
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)

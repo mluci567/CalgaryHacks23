@@ -25,6 +25,7 @@ const Login = () => {
       ></path>
     </svg>
   );
+
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -46,6 +47,7 @@ const Login = () => {
     <div className="login">
       <div className="leftSide">
         <div className="centered">
+         <h1><img src="/room-wise-logo.png" width={250} height={137.5} style={{ marginLeft: 140 }} /></h1>
           <h1>Let's start studying.</h1>
           <p>Find a space to study that works for you.</p>
           <br />

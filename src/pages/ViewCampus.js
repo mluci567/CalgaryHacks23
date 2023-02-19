@@ -40,10 +40,6 @@ const ViewCampus = () => {
           },
         }}
 
- 
-
-
-
         onMapLoad={(map) => {
           new window.google.maps.Marker({
             position: { lat:51.012235, lng:-114.128293  },
@@ -117,7 +113,7 @@ const ViewCampus = () => {
           });
 
           const georssLayer = new window.google.maps.KmlLayer({
-            url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=13hcoDvLGU3e82WwLqdwffIeQSPTCku0&lid=w0vhAiWaJx0",
+            url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1kJy8v5jp6At59CQu7wqtF___9AUKe4M&lid=RQ4pzkO6Vws",
             suppressInfoWindows: false,
             map:map,
             

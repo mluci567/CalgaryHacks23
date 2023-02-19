@@ -101,7 +101,6 @@ const FindRoom = () => {
           "transit",
           "outlets",
           "whiteboard",
-          "adjustablelighting",
         ]}
         selectedFilters={filters}
         onFilterChange={setFilters}

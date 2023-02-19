@@ -95,7 +95,7 @@ function Sidebar() {
           <SidebarItem title="View Your Campus" onClick="view-campus" />
           <SidebarItem title="Find a Room" onClick="find-room" />
           <SidebarItem title="Find a Group" onClick="find-group" />
-          <SidebarItem title="Create a Group" onClick="create-group" />
+          {/* <SidebarItem title="Create a Group" onClick="create-group" /> */}
         </div>
         <footer>
           <Link to="../feedback">

@@ -6,6 +6,7 @@ import volumeIcon from "./assets/volume.png";
 import washroomIcon from "./assets/bathroom.png";
 import lightIcon from "./assets/light-bulb.png";
 import presentationIcon from "./assets/presentation.png";
+import transitIcon from "./assets/bus-station.png";
 
 const RoomData = ({
   roomnumber,
@@ -38,13 +39,6 @@ const RoomData = ({
       <p>Capacity: {capacity}</p>
       <hr />
       <h4>Amenities</h4>
-      {adjustablelighting && (
-        <img
-          src={lightIcon}
-          alt="light icon"
-          title="Adjustable Lighting Avaliable"
-        ></img>
-      )}
       {whiteboard && (
         <img
           src={presentationIcon}
@@ -61,16 +55,12 @@ const RoomData = ({
         ></img>
       )}
       {parking && (
-        <img
-          src={disabledIcon}
-          alt="disabled icon"
-          title="Parking Nearby"
-        ></img>
+        <img src={parkingIcon} alt="parking icon" title="Parking Nearby"></img>
       )}
       {transit && (
         <img
-          src={parkingIcon}
-          alt="power icon"
+          src={transitIcon}
+          alt="transit icon"
           title="Transit Accessable"
         ></img>
       )}

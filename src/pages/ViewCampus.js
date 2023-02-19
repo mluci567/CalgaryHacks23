@@ -33,14 +33,6 @@ const ViewCampus = () => {
 
         onMapLoad={(map) => {
 
-          var marker = new window.google.maps.Marker({
-            position: { lat: 51.01225, lng: -114.12779 },
-            map: map,
-            title: "Hello Istanbul!",
-          });
-
-          
-          marker.setMap(map);
         }}
       />
     </div>

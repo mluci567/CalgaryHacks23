@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Gloock&display=swap");
+
+.Feedback {
+  background-color: #0f5474;
+  font-size: 20px;
+  padding-left: 12px;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.Feedback div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+hr {
+  border: 1px solid #fff;
+  margin: 0;
+  width: 95%;
+}
+
+header p {
+  margin: 0;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.Feedback h1 {
+  padding: 20px 10px;
+  margin: 0;
+  width: 95%;
+  padding-bottom: 0;
+  font-size: 40px;
+  color: #fff;
+  font-family: "Gloock";
+}
+
+.Feedback input,
+.Feedback select {
+  padding: 10px;
+  margin: 0;
+  font-size: 24px;
+  color: #fff;
+  font-family: sans-serif;
+  display: block;
+  background-color: #0f5474;
+  border: none;
+  border-bottom: 1px solid #3377aa;
+  transition: 0.3s;
+  width: 95%;
+  margin-bottom: 10px;
+}
+
+.Feedback select {
+  width: 84%;
+}
+
+.Feedback select.disabled {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.Feedback input:focus {
+  outline: none;
+  border-bottom: 1px solid #fff;
+  transition: 0.3s;
+}
+
+.Feedback input:hover {
+  border-bottom: 1px solid #fff;
+  transition: 0.3s;
+}
+
+.Feedback input::placeholder {
+  color: #fff;
+}
+
+.Feedback button,
+.Feedback input[type="submit"] {
+  width: 95%;
+  padding: 10px;
+  margin: 0;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: sans-serif;
+  display: inline-block;
+  margin-right: 10px;
+  background-color: #0f5474;
+  border: 0;
+  border-bottom: 1px solid #fff;
+  margin-top: 20px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.Feedback textarea {
+  padding: 10px;
+  margin: 0;
+  font-size: 24px;
+  color: #fff;
+  font-family: sans-serif;
+  display: block;
+  background-color: #0f5474;
+  border: none;
+  border-bottom: 1px solid #3377aa;
+  transition: 0.3s;
+  width: 100%;
+  margin-bottom: 10px;
+  height: 200px;
+  resize: none;
+  width: 92%;
+}
+
+.Feedback textarea:focus {
+  outline: none;
+  border-bottom: 1px solid #fff;
+  transition: 0.3s;
+}
+
+.Feedback button:hover,
+.Feedback input[type="submit"]:hover {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 1);
+  transition: 0.3s;
+}
+
+footer img:hover {
+  rotate: 10deg;
+  transition: 0.3s;
+}

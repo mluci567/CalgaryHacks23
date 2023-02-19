@@ -52,6 +52,20 @@ body {
   overflow: auto;
 }
 
+.ViewCampus {
+  overflow: hidden;
+  overflow-y: hidden;
+}
+
+.ViewCampus::-webkit-scrollbar {
+  display: none;
+}
+
+.ViewCampus {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .login,
 .register {
   width: 100%;

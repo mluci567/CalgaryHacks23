@@ -9,6 +9,7 @@ import ViewCampus from "./pages/ViewCampus";
 import Feedback from "./pages/Feedback";
 import FindGroup from "./pages/FindGroup";
 import CreateGroup from "./pages/CreateGroup";
+import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Login />} />
           <Route path="dashboard" element={<Home />}>
+            <Route index element={<ViewCampus />} />
             <Route path="view-campus" element={<ViewCampus />} />
             <Route path="find-room" element={<FindRoom />} />
             <Route path="find-group" element={<FindGroup />} />
@@ -25,6 +27,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="feedback" element={<Feedback />} />
+          <Route path="settings" element={<Settings />} />
 
           <Route path="*" element={<h1>404: Not Found</h1>} />
         </Route>

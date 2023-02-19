@@ -98,10 +98,10 @@ function Sidebar() {
           <SidebarItem title="Create a Group" onClick="create-group" />
         </div>
         <footer>
-          <Link to="feedback">
+          <Link to="../feedback">
             <span>Feedback</span>
           </Link>
-          <Link to="settings">
+          <Link to="../settings">
             <img src={settingsIcon} alt="settings icon"></img>
           </Link>
         </footer>

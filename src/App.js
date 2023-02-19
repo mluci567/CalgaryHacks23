@@ -10,6 +10,7 @@ import Feedback from "./pages/Feedback";
 import FindGroup from "./pages/FindGroup";
 import CreateGroup from "./pages/CreateGroup";
 import Settings from "./pages/Settings";
+import Error from "./pages/Error";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="feedback" element={<Feedback />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="error" element={<Error />} />
 
           <Route path="*" element={<h1>404: Not Found</h1>} />
         </Route>

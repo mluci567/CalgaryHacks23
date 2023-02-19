@@ -55,6 +55,11 @@ const Register = () => {
       localStorage.setItem("email", newUser.email);
       localStorage.setItem("institution", newUser.institution);
 
+      if (window.innerWidth < 900) {
+        navigate("/error");
+        return;
+      }
+
       navigate("/dashboard");
     } else {
       setErrorMessage("Please fill out all fields");

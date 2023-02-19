@@ -38,6 +38,11 @@ const Login = () => {
       localStorage.setItem("email", user.email);
       localStorage.setItem("institution", user.institution);
 
+      if (window.innerWidth < 900) {
+        navigate("/error");
+        return;
+      }
+
       navigate("/dashboard");
     } else {
       setErrorMessage("Incorrect username or password");
@@ -47,7 +52,14 @@ const Login = () => {
     <div className="login">
       <div className="leftSide">
         <div className="centered">
-         <h1><img src="/room-wise-logo.png" width={250} height={137.5} style={{ marginLeft: 140 }} /></h1>
+          <h1>
+            <img
+              src="/room-wise-logo.png"
+              width={250}
+              height={137.5}
+              style={{ marginLeft: 140 }}
+            />
+          </h1>
           <h1>Let's start studying.</h1>
           <p>Find a space to study that works for you.</p>
           <br />

@@ -27,6 +27,18 @@ const ViewCampus = () => {
           zoom: 21,
           heading:90,
           mapId:'897cac78f7867e60',
+          disableDefaultUI: true,
+          minZoom: 17,
+          maxZoom: 21,
+          restriction: {
+            latLngBounds: {
+              north: 51.014468,
+              south: 51.009813,
+              east: -114.123462,
+              west: -114.137163,
+            },
+          },
+        
         }}
 
 

@@ -80,12 +80,12 @@ const RoomData = ({
       <hr />
       <h4>Noise Level</h4>
       {/* draw a volume icon for noise level */}
-      {noiselevel === "1" && (
+      {noiselevel === 1 && (
         <div className="rating">
           <img src={volumeIcon} alt="volume icon" title="Low Volume Area"></img>
         </div>
       )}
-      {noiselevel === "2" && (
+      {noiselevel === 2 && (
         <div className="rating">
           <img
             src={volumeIcon}
@@ -99,7 +99,7 @@ const RoomData = ({
           ></img>
         </div>
       )}
-      {noiselevel === "3" && (
+      {noiselevel === 3 && (
         <div className="rating">
           <img
             src={volumeIcon}
@@ -118,7 +118,7 @@ const RoomData = ({
           ></img>
         </div>
       )}
-      {noiselevel === "4" && (
+      {noiselevel === 4 && (
         <div className="rating">
           <img
             src={volumeIcon}
@@ -142,7 +142,7 @@ const RoomData = ({
           ></img>
         </div>
       )}
-      {noiselevel === "5" && (
+      {noiselevel === 5 && (
         <div className="rating">
           <img
             src={volumeIcon}
@@ -175,7 +175,7 @@ const RoomData = ({
       <hr />
       <h4>Accessibility</h4>
 
-      {accessrating === "1" && (
+      {accessrating === 1 && (
         <div className="rating">
           <img
             src={disabledIcon}
@@ -184,7 +184,7 @@ const RoomData = ({
           ></img>
         </div>
       )}
-      {accessrating === "2" && (
+      {accessrating === 2 && (
         <div className="rating">
           <img
             src={disabledIcon}
@@ -198,7 +198,7 @@ const RoomData = ({
           ></img>
         </div>
       )}
-      {accessrating === "3" && (
+      {accessrating === 3 && (
         <div className="rating">
           <img
             src={disabledIcon}
@@ -217,7 +217,7 @@ const RoomData = ({
           ></img>
         </div>
       )}
-      {accessrating === "4" && (
+      {accessrating === 4 && (
         <div className="rating">
           <img
             src={disabledIcon}
@@ -241,7 +241,7 @@ const RoomData = ({
           ></img>
         </div>
       )}
-      {accessrating === "5" && (
+      {accessrating === 5 && (
         <div className="rating">
           <img src={disabledIcon} alt="energy icon" title="Accessible"></img>
           <img src={disabledIcon} alt="energy icon" title="Accessible"></img>

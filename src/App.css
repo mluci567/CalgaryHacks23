@@ -4,6 +4,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 .sidebarItem * {
@@ -52,20 +53,6 @@ body {
   overflow: auto;
 }
 
-.ViewCampus {
-  overflow: hidden;
-  overflow-y: hidden;
-}
-
-.ViewCampus::-webkit-scrollbar {
-  display: none;
-}
-
-.ViewCampus {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
 .login,
 .register {
   width: 100%;
@@ -73,19 +60,21 @@ body {
 
 .FindRoom {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
   padding: 10px;
-  overflow-y: auto;
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 100vh;
 }
 
 .roomList {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
   align-items: flex-start;
-  width: 100%;
+  width: 97%;
   padding: 10px;
+  padding-left: 18px;
 }
 
 .hideMe {
@@ -102,7 +91,26 @@ body {
   border-radius: 5px;
   margin: 10px;
   color: #fff;
-  min-width: 300px;
+  flex-grow: 1;
+}
+
+.RoomSearcher {
+  background-color: #0f5474;
+  color: #fff;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 5px;
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.RoomSearcher h1 {
+  font-family: "Gloock", cursive;
+  font-size: 50px;
+  padding-left: 30px;
 }
 
 div.rating {

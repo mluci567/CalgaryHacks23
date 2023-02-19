@@ -38,19 +38,93 @@ const ViewCampus = () => {
               west: -114.137163,
             },
           },
-        
         }}
+
+ 
+
 
 
         onMapLoad={(map) => {
+          new window.google.maps.Marker({
+            position: { lat:51.012235, lng:-114.128293  },
+            map,
+            icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+          });
+          new window.google.maps.Marker({
+            position: { lat:51.012162, lng:-114.128088  },
+            map,
+            icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+          });
+          new window.google.maps.Marker({
+            position: { lat:51.012105, lng: -114.127906 },
+            map,
+            icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+          });
+          new window.google.maps.Marker({
+            position: { lat:51.012055, lng:-114.127726  },
+            map,
+            icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+          });
+          new window.google.maps.Marker({
+            position: { lat:51.011993, lng: -114.127545  },
+            map,
+            icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+          });
+          new window.google.maps.Marker({
+            position: { lat:51.01194, lng:-114.127384  },
+            map,
+            icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+          });
+          new window.google.maps.Marker({
+            position: { lat: 51.012511, lng: -114.127983 },
+            map,
+            icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+          });
+          new window.google.maps.Marker({
+            position: { lat:51.012457 ,lng:-114.127825  },
+            map,
+            icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+          });
+          new window.google.maps.Marker({
+            position: { lat: 51.012415 ,lng:-114.127683 },
+            map,
+            icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+          });
+          new window.google.maps.Marker({
+            position: { lat: 51.012366 , lng:-114.127522 },
+            map,
+            icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+          });
+          new window.google.maps.Marker({
+            position: { lat: 51.012305, lng:-114.127361 },
+            map,
+            icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+          });
+          new window.google.maps.Marker({
+            position: { lat:51.012256, lng:-114.127171  },
+            map,
+            icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+          });
+          new window.google.maps.Marker({
+            position: { lat:51.012276, lng:-114.127812  },
+            map,
+            icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+          });
+          new window.google.maps.Marker({
+            position: { lat:51.0122, lng:-114.127552},
+            map,
+            icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+          });
+
           const georssLayer = new window.google.maps.KmlLayer({
-            url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1eW-S4Ouzct9qitK6oSt_drCnFh1bGwo&lid=E7TrCQyC9tc",
+            url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=13hcoDvLGU3e82WwLqdwffIeQSPTCku0&lid=w0vhAiWaJx0",
+            suppressInfoWindows: false,
+            map:map,
+            
           });
         
           georssLayer.setMap(map);
         }
-        
-
         }
       />
     </div>

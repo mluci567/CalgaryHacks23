@@ -9,7 +9,7 @@ from flask_login import LoginManager
 
 app = Flask(__name__, template_folder= "pages")
 login_manager = LoginManager()
-app.secret_key = '73e57ae4a95b2e2967b1f9c3382bcac800c3c54e3a104bd805abe665e73718f3'
+app.secret_key = 'secret key'
 
 #password = 'pa$$w0rd'
 #h = hashlib.md5(password.encode())

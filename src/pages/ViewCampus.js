@@ -23,15 +23,41 @@ const ViewCampus = () => {
       <Map
         id="myMap"
         options={{
-          center: { lat: 41.0082, lng: 28.9784 },
-          zoom: 8,
+          center: { lat: 51.01225, lng: -114.12779 },
+          zoom: 19.75,
+          tilt: 100,
+          heading:90,
+          mapId:'897cac78f7867e60',
         }}
+
+
         onMapLoad={(map) => {
+
           var marker = new window.google.maps.Marker({
-            position: { lat: 41.0082, lng: 28.9784 },
+            position: { lat: 51.01225, lng: -114.12779 },
             map: map,
             title: "Hello Istanbul!",
           });
+
+          const triangleCoords = [
+            { lat: 51.011853582300624, lng: -114.12734838454602},
+            { lat: 51.0122285112908, lng: -114.12704295502095},
+            { lat: 51.012187979686914, lng: -114.1283917152849},
+            { lat: 51.012579855073746, lng: -114.12807241275542},
+            
+          ];
+          // Construct the polygon.
+          const bermudaTriangle = new window.google.maps.Polygon({
+            paths: triangleCoords,
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 3,
+            fillColor: "#FF0000",
+            fillOpacity: 0.35,
+          });
+          bermudaTriangle.setMap(map);
+
+          
           marker.setMap(map);
         }}
       />

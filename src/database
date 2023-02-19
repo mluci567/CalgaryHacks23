@@ -1,0 +1,47 @@
+import sqlite3 as sql
+from flask import Flask, render_template
+import openpyxl
+
+# create connection to database 
+database = sql.connect('database.db')
+
+
+database.execute('CREATE TABLE rooms (room TEXT, floor TEXT, type TEXT, capacity TEXT, hours TEXT, accessibility TEXT, noise TEXT, lighting TEXT, whiteboard TEXT, outlets TEXT, food TEXT, washroom TEXT, parking TEXT, transit TEXT)')
+database.execute('CREATE classes (subject TEXT, course_number TEXT, section TEXT, crn TEXT, course_title TEXT)')
+
+app = Flask(__name__)
+
+@app.route('/')
+
+def new_room():
+    #load excel workbook
+    workbook = openpyxl.load_workbook('./database/ROOM_CHARACTERISTICS.xlsx')
+    # select worksheet
+    worksheet = workbook.worksheets[0]
+    # iterate over the rows in the worksheet and insert them into the database
+    for row in worksheet.iter_rows(min_row=2, values_only=True):
+        database.execute("INSERT INTO rooms (room, floor, type, capacity, hours, accessibility, noise, lighting, whiteboard, outlets, food, washroom, parking, transit) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", row)
+    database.commit()
+
+
+def new_class():
+    #load excel workbook
+    workbook = openpyxl.load_workbook('./database/CLASS_INFO.xlsx')
+    # select worksheet
+    worksheet = workbook.worksheets[0]
+    # iterate over the rows in the worksheet and insert them into the database
+    for row in worksheet.iter_rows(min_row=2, values_only=True):
+        database.execute("INSERT INTO classes (subject, course_number, section, crn, course_title) VALUES (?, ?, ?, ?, ?)", row)
+    database.commit()
+
+new_class()
+new_room()
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+                            
+
+
+
+

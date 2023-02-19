@@ -10,5 +10,11 @@
     "name": "Jane Doe",
     "email": "janedoe@example.com",
     "institution": "University of Example"
+  },
+  {
+    "password": "password123",
+    "name": "Matthew H",
+    "email": "mhreh594@mtroyal.ca",
+    "institution": "Mount Royal University"
   }
 ]

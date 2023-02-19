@@ -75,27 +75,47 @@ const FindRoom = () => {
     return a.roomnumber.localeCompare(b.roomnumber);
   });
 
-  console.log(
-    sortedSubcomponents
-      .filter((subcomponent) => filters.includes(subcomponent.filter))
-      .map((subcomponent) => <RoomData {...subcomponent} />)
-  );
+  const filteredSubcomponents = sortedSubcomponents.filter((subcomponent) => {
+    if (filters.length === 0) {
+      return true;
+    }
+    const filterConditions = {
+      food: subcomponent.food,
+      washroom: subcomponent.washroom,
+      parking: subcomponent.parking,
+      transit: subcomponent.transit,
+      outlets: subcomponent.outlets,
+      whiteboard: subcomponent.whiteboard,
+      adjustablelighting: subcomponent.adjustablelighting,
+    };
+    return filters.every((filter) => filterConditions[filter]);
+  });
 
   return (
     <div className="FindRoom">
       <RoomSearcher
-        filterOptions={["food"]}
+        filterOptions={[
+          "food",
+          "washroom",
+          "parking",
+          "transit",
+          "outlets",
+          "whiteboard",
+          "adjustablelighting",
+        ]}
         selectedFilters={filters}
         onFilterChange={setFilters}
         onSortChange={setSort}
       />
       <div className="roomList">
-        {sortedSubcomponents
-          .filter((subcomponent) => filters.includes(subcomponent.filter))
-          .map((subcomponent) => (
-            <RoomData {...subcomponent} />
-          ))}
+        {/* show only the components with the given filters */}
+        {filteredSubcomponents.map((subcomponent) => (
+          <RoomData {...subcomponent} />
+        ))}
       </div>
+      {filteredSubcomponents.length === 0 && (
+        <div className="noResults">No results found</div>
+      )}
     </div>
   );
 };

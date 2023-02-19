@@ -66,6 +66,10 @@ p {
   width: 84%;
 }
 
+.centered select.disabled {
+  color: rgba(255, 255, 255, 0.5);
+}
+
 .rightSide {
   position: absolute;
   right: 0;

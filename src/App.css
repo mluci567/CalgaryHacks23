@@ -50,3 +50,8 @@ body {
   flex: 1;
   overflow: auto;
 }
+
+.login,
+.register {
+  width: 100%;
+}

@@ -107,10 +107,16 @@ const Register = () => {
             <select
               name="institution"
               id="institution"
+              className="disabled"
               placeholder="Institution"
-              onChange={(e) => setInstitution(e.target.value)}
+              defaultValue="disabled"
+              onChange={(e) => {
+                setInstitution(e.target.value);
+                // remove the class "disabled" from the select element
+                e.target.classList.remove("disabled");
+              }}
             >
-              <option disabled selected value="">
+              <option disabled value="disabled">
                 Select an Institution
               </option>
               <option value="mru">Mount Royal University, Alberta</option>

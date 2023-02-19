@@ -2,12 +2,40 @@ from flask import Flask, render_template
 import sqlite3 as sql
 import openpyxl
 import threading
+from flask_wtf import FlaskForm
+from wtforms import StringField, IntegerField, SelectField
+# import wtforms.validators as w 
 
 database = sql.connect('./database/database.db', check_same_thread=False)
-
 app = Flask(__name__)
 
+class RoomForm(FlaskForm):
+    # used to add new room to database (see add_room)
+    room = StringField('Room')  # there should be validation here but I was too annoyed to make it work 
+    floor = SelectField('Floor', choices=[('1', '1'),('2','2'),('3','3'),('4','4')])
+    type_ = SelectField('Type', choices=[('Group Room', 'Group Room'), ('Audio Prod.', 'Audio Prod.'), ('Presentation', 'Presentation')])
+    capacity = IntegerField('Capacity')
+    hours = IntegerField('Hours')
+    accessibility = IntegerField('Accessibility') # SelectField('Accessibility, choices=[('Accessible', 'Accessible'),('Less Accessible', 'Less Accessible'),('Not Accessible', 'Not Accessible')])
+    noise = IntegerField('Noise')  # SelectField ('Noise', choices=[('Quiet', 'Quiet'), ('Moderate', 'Moderate'), ('Loud', 'Loud')])
+    lighting = SelectField('Lighting', choices = [('T','T'),('F','F')]) # [('Adjustable', 'Adjustable'), ('Not adjustable', 'Not adjustable')])
+    whiteboard = SelectField('Whiteboard', choices = [('T','T'),('F','F')])
+    outlets = SelectField('Outlets', choices =[('4', '4'), ('8', '8'), ('10','10')])
+    food = SelectField('Food', choices = [('T','T'),('F','F')]) # [('Accessible', 'Accessible'),('Less Accessible', 'Less Accessible'),('Not Accessible', 'Not Accessible')])
+    washroom = SelectField('Washroom', choices = [('T','T'),('F','F')]) # [('Accessible', 'Accessible'),('Less Accessible', 'Less Accessible'),('Not Accessible', 'Not Accessible')])
+    parking = SelectField('Parking', choices = [('T','T'),('F','F')]) # [('Accessible', 'Accessible'),('Less Accessible', 'Less Accessible'),('Not Accessible', 'Not Accessible')])
+    transit = SelectField('Transit', choices = [('T','T'),('F','F')]) # [('Accessible', 'Accessible'),('Less Accessible', 'Less Accessible'),('Not Accessible', 'Not Accessible')])
+
+class ClassForm(FlaskForm): 
+    # used to add new class to database (see add_class)
+    subject = StringField('Subject')  # again there should be validation here but I was still too annoyed to make it work
+    course_number = StringField('Course Number')
+    section = IntegerField('Section')
+    crn = IntegerField('CRN')
+    course_title = StringField('Course Title')
+
 def get_data(spreadsheet_info):
+    # read in excel sheets to database 
     for file_name, table_name in spreadsheet_info:
         workbook = openpyxl.load_workbook(file_name)
         worksheet = workbook.worksheets[0]
@@ -20,11 +48,13 @@ def get_data(spreadsheet_info):
             insert_query = f"INSERT INTO {table_name} ({column_names}) VALUES ({placeholders})"
             database.execute(insert_query, row)
         database.commit()  
-        
     database.close
+
+    return 'database fill complete'
 
 @app.route('/')
 def load():
+    # read room and class data ? 
     spreadsheet_info = [('./database/ROOM_CHARACTERISTICS.xlsx', 'rooms'), ('./database/CLASS_INFO.xlsx', 'classes')]
     t = threading.Thread(target=get_data, args=(spreadsheet_info,))
     t.start()
@@ -33,10 +63,49 @@ def load():
 
 @app.route('/data')
 def data():
+    # apply database to template for web 
     rooms = database.execute('SELECT * FROM rooms').fetchall()
     classes = database.execute('SELECT * FROM classes').fetchall()
    
     return render_template('./database/template.html', rooms=rooms, classes=classes)
+
+@app.route('/add_room', methods=['GET', 'POST'])
+def add_room():
+    # add new room to database (using RoomForm)
+    form = database
+    if form.validate_on_submit():
+        room = form.room.data
+        floor = form.floor.data
+        type = form.type.data
+        capacity = form.capacity.data
+        hours = form.hours.data
+        accessibility = form.accessibility.data
+        noise = form.noise.data
+        lighting = form.lighting.data
+        whiteboard = form.whiteboard.data
+        outlets = form.outlets.data
+        food = form.food.data
+        washroom = form.washroom.data
+        parking = form.parking.data
+        transit = form.transit.data
+        insert_query = "INSERT INTO rooms VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        database.execute(insert_query, (room, capacity, type, floor, hours, accessibility, noise, lighting, whiteboard, outlets, food, washroom, parking, transit))
+
+        return 
+
+def add_class():
+    # add new class to database (using ClassForm)
+    form = database 
+    if form.validate_on_submit(): 
+        subject = form.subject.data
+        course_number = form.course_number.data
+        section = form.section.data
+        crn = form.crn.data
+        course_title = form.course_title.data
+        insert_query = "INSERT INTO classes VALUES (?,?,?,?,?)"
+        database.execute(insert_query (subject, course_number, section, crn, course_title))
+
+    return 
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,6 +1,5 @@
 from flask import Flask, render_template
 import sqlite3 as sql
-import mysql.connector
 import openpyxl
 import threading
 from flask_wtf import FlaskForm
@@ -82,7 +81,8 @@ def data():
     # apply database to template for web 
     rooms = database.execute('SELECT * FROM rooms').fetchall()
     classes = database.execute('SELECT * FROM classes').fetchall()  
-    return render_template('./database/template.html', rooms=rooms, classes=classes)
+    groups = database.execute('SELECT * FROM groups').fetchall()
+    return render_template('./database/template.html', rooms=rooms, classes=classes, groups=groups)
 
 @app.route('/add_room', methods=['GET', 'POST'])
 def add_room():
@@ -197,19 +197,15 @@ class GroupItem(Base):
 
 def sort_classes():
     #sort classes by subject, course number and section
-    session = Session.future(True) # define session 
-    subject_input = 'this would be user input' 
-    course_number_input = 'more input that isnt'
-    section_input = 'also user input but not'
-    #sort classes by subject, course number and section ?
-    results = session.query(ClassItem).filter(ClassItem.subject == subject_input, ClassItem.section == section_input, ClassItem.course_number == course_number_input).order_by(ClassItem.course_number).all() 
+    session = Session() # define session 
+    results = session.query(ClassItem).filter(ClassItem.subject, ClassItem.section, ClassItem.course_number, ClassItem.course_title, ClassItem.crn).order_by(ClassItem.course_number).all() 
     session.close()
     return results
 
 def sort_rooms():
     #sort rooms by all attributes
     session = Session()
-    result = session.query(RoomItem).filter(RoomItem.floor, RoomItem.room, RoomItem.type_, RoomItem.capacity, RoomItem.hours, RoomItem.accessibility, RoomItem.noise, RoomItem.lighting, RoomItem.whiteboard, RoomItem.outlets, RoomItem.food, RoomItem.washroom, RoomItem.parking, RoomItem.transit)
+    result = session.query(RoomItem).filter(RoomItem.floor, RoomItem.room, RoomItem.type_, RoomItem.capacity, RoomItem.hours, RoomItem.accessibility, RoomItem.noise, RoomItem.lighting, RoomItem.whiteboard, RoomItem.outlets, RoomItem.food, RoomItem.washroom, RoomItem.parking, RoomItem.transit).order_by(RoomItem.floor).all() 
     session.close()
 
     return result 

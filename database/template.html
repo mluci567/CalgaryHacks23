@@ -69,5 +69,34 @@
         {% endfor %}
       </tbody>
     </table>
+    <h2>Groups</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Subject</th>
+          <th>Course</th>
+          <th>Meet Time</th>
+          <th>Is Recurring</th>
+          <th>Max Size</th>
+          <th>Purpose</th>
+          <th>Room</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for group in groups|sort(attribute='name')|sort(attribute='subject')|sort(attribute='course')|sort(attribute='meet_time')|sort(attribute='is_recurring')|sort(attribute='max_size')|sort(attribute='purpose')|sort(attribute='room') %}
+        <tr>
+          <td>{{ group[0] }}</td>
+          <td>{{ group[1] }}</td>
+          <td>{{ group[2] }}</td>
+          <td>{{ group[3] }}</td>
+          <td>{{ group[4] }}</td>
+          <td>{{ group[5] }}</td>
+          <td>{{ group[6] }}</td>
+          <td>{{ group[7] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </body>
 </html>

@@ -70,3 +70,75 @@ body {
 .register {
   width: 100%;
 }
+
+.FindRoom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.roomList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: 100%;
+  padding: 10px;
+}
+
+.hideMe {
+  color: #0f5474;
+  padding: 0;
+  margin: 0;
+  font-size: 1px;
+}
+
+.roomData {
+  background-color: #0f5474;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px;
+  color: #fff;
+  min-width: 300px;
+}
+
+div.rating {
+  float: left;
+  display: block;
+  width: 100%;
+}
+
+.roomData h4 {
+  padding: 0;
+  margin: 0;
+}
+
+.roomData img {
+  width: 30px;
+  margin-right: 10px;
+  margin-top: 8px;
+  filter: invert(100%);
+}
+
+.roomHeader {
+  display: flex;
+}
+
+.roomData h3 {
+  font-family: "Gloock", cursive;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.roomData hr {
+  width: 100%;
+  margin: 6px 0;
+}
+
+.roomData p {
+  margin: 0;
+  padding: 0;
+}

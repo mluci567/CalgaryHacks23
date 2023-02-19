@@ -1,9 +1,15 @@
 from flask import Flask, render_template
 import sqlite3 as sql
+import mysql.connector
 import openpyxl
 import threading
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SelectField
+from wtforms import StringField, IntegerField, BooleanField, SelectField
+from sqlalchemy import create_engine, Column, Integer, String, Boolean
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+import requests
+import json
 # import wtforms.validators as w 
 
 database = sql.connect('./database/database.db', check_same_thread=False)
@@ -15,7 +21,7 @@ class RoomForm(FlaskForm):
     floor = SelectField('Floor', choices=[('1', '1'),('2','2'),('3','3'),('4','4')])
     type_ = SelectField('Type', choices=[('Group Room', 'Group Room'), ('Audio Prod.', 'Audio Prod.'), ('Presentation', 'Presentation')])
     capacity = IntegerField('Capacity')
-    hours = IntegerField('Hours')
+    hours = StringField('Hours')
     accessibility = IntegerField('Accessibility') # SelectField('Accessibility, choices=[('Accessible', 'Accessible'),('Less Accessible', 'Less Accessible'),('Not Accessible', 'Not Accessible')])
     noise = IntegerField('Noise')  # SelectField ('Noise', choices=[('Quiet', 'Quiet'), ('Moderate', 'Moderate'), ('Loud', 'Loud')])
     lighting = SelectField('Lighting', choices = [('T','T'),('F','F')]) # [('Adjustable', 'Adjustable'), ('Not adjustable', 'Not adjustable')])
@@ -34,6 +40,16 @@ class ClassForm(FlaskForm):
     crn = IntegerField('CRN')
     course_title = StringField('Course Title')
 
+class GroupForm(FlaskForm):
+    name = StringField('Group Name')
+    subject = StringField('Subject')
+    course = StringField('Course')
+    meet_time = StringField('Meet Time')
+    is_recurring = BooleanField('Is recurring meeting')
+    max_size = IntegerField('Maximum Group Size')
+    purpose = StringField('Group Goal Description')
+    room = StringField('Meeting Space')
+
 def get_data(spreadsheet_info):
     # read in excel sheets to database 
     for file_name, table_name in spreadsheet_info:
@@ -49,34 +65,31 @@ def get_data(spreadsheet_info):
             database.execute(insert_query, row)
         database.commit()  
     database.close
-
     return 'database fill complete'
 
 @app.route('/')
 def load():
     # read room and class data ? 
-    spreadsheet_info = [('./database/ROOM_CHARACTERISTICS.xlsx', 'rooms'), ('./database/CLASS_INFO.xlsx', 'classes')]
+    spreadsheet_info = [('./database/ROOM_CHARACTERISTICS.xlsx', 'rooms'), ('./database/CLASS_INFO.xlsx', 'classes'), ('./database/GROUP_INFO.xlsx', 'groups')]
     t = threading.Thread(target=get_data, args=(spreadsheet_info,))
     t.start()
-
-    return 'data uploaded successfully'
+    return 'data loaded'
 
 @app.route('/data')
 def data():
     # apply database to template for web 
     rooms = database.execute('SELECT * FROM rooms').fetchall()
-    classes = database.execute('SELECT * FROM classes').fetchall()
-   
+    classes = database.execute('SELECT * FROM classes').fetchall()  
     return render_template('./database/template.html', rooms=rooms, classes=classes)
 
 @app.route('/add_room', methods=['GET', 'POST'])
 def add_room():
-    # add new room to database (using RoomForm)
-    form = database
+    # add new room to database 
+    form = RoomForm()
     if form.validate_on_submit():
         room = form.room.data
         floor = form.floor.data
-        type = form.type.data
+        type_ = form.type_.data # Updated variable name to avoid conflict with built-in function
         capacity = form.capacity.data
         hours = form.hours.data
         accessibility = form.accessibility.data
@@ -89,13 +102,15 @@ def add_room():
         parking = form.parking.data
         transit = form.transit.data
         insert_query = "INSERT INTO rooms VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-        database.execute(insert_query, (room, capacity, type, floor, hours, accessibility, noise, lighting, whiteboard, outlets, food, washroom, parking, transit))
-
+        database.execute(insert_query, (room, capacity, type_, floor, hours, accessibility, noise, lighting, whiteboard, outlets, food, washroom, parking, transit))
+        database.commit()
+        
         return 
 
+@app.route('/add_class', methods=['GET', 'POST'])
 def add_class():
-    # add new class to database (using ClassForm)
-    form = database 
+    # add new class to database 
+    form = ClassForm() 
     if form.validate_on_submit(): 
         subject = form.subject.data
         course_number = form.course_number.data
@@ -104,8 +119,125 @@ def add_class():
         course_title = form.course_title.data
         insert_query = "INSERT INTO classes VALUES (?,?,?,?,?)"
         database.execute(insert_query (subject, course_number, section, crn, course_title))
-
+        database.commit()
     return 
+
+@app.route('/add_group', methods=['GET', 'POST'])
+def add_group():
+    form = GroupForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        subject = form.subject.data
+        course = form.course.data
+        meet_time = form.meet_time.data
+        is_recurring = form.is_recurring.data
+        max_size = form.max_size.data 
+        purpose = form.purpose.data
+        room = form.room.data
+        insert_query = "INSERT INTO groups VALUES (?,?,?,?,?,?,?,?)"
+        database.execute(insert_query(name, subject, course, meet_time, is_recurring, max_size, purpose, room))
+        database.commit()
+    return
+
+# database connection
+engine = create_engine('sqlite:///./database/database.db', echo=True)
+Base = declarative_base()
+Session = sessionmaker(bind=engine)
+
+# Item model
+class RoomItem(Base):
+    __tablename__ = 'rooms'
+
+    room = Column(String, primary_key=True)
+    floor = Column(Integer)
+    type_ = Column(String)
+    capacity = Column(Integer)
+    hours = Column(String)
+    accessibility = Column(Boolean)
+    noise = Column(Integer)
+    lighting = Column(Boolean)
+    whiteboard = Column(Boolean)
+    outlets = Column(Integer)
+    food = Column(Boolean)
+    washroom = Column(Boolean)
+    parking = Column(Boolean)
+    transit = Column(Boolean)
+
+    def __repr__(self):
+        return f"<Item(room={self.room}, floor='{self.floor}', type_={self.type_}, capacity={self.capacity}, hours={self.hours}, accessibility={self.accessibility}, noise={self.noise}, lighting={self.lighting}, whiteboard={self.whiteboard}, outlets={self.outlets}, food={self.food}, washroom={self.washroom}, parking={self.parking}, transit={self.transit})>"
+
+class ClassItem(Base):
+    __tablename__ = 'classes'
+
+    subject = Column(String, primary_key=True)
+    course_number = Column(Integer)
+    section = Column(Integer)
+    crn = Column(Integer)
+    course_title = Column(String)
+
+    def __repr__(self):
+        return f"<Item(subject={self.subject}, course_number={self.course_number}, section={self.section}, crn={self.crn}, course_title={self.course_title})>"
+
+class GroupItem(Base):
+    __tablename__ = 'groups'
+
+    name = Column(String, primary_key=True)
+    subject = Column(String)
+    course = Column(String)
+    meet_time = Column(String)
+    is_recurring = Column(Boolean)
+    max_size = Column(Integer)
+    purpose = Column(String)
+    room = Column(String)
+
+    def __repr__(self):
+        return f"<Item(name={self.name}, subject={self.subject}, course={self.course}, meet_time={self.meet_time}, is_recurring={self.is_recurring}, max_size={self.max_size}, purpose={self.purpose}, room={self.room})>"
+
+
+
+def sort_classes():
+    session = Session.future(True) # define session 
+    subject_input = 'this would be user input' 
+    course_number_input = 'more input that isnt'
+    section_input = 'also user input but not'
+    #sort classes by subject, course number and section ?
+    results = session.query(ClassItem).filter(ClassItem.subject == subject_input, ClassItem.section == section_input, ClassItem.course_number == course_number_input).order_by(ClassItem.course_number).all() 
+    session.close()
+    return results
+
+def sort_rooms():
+    session = Session()
+    result = session.query(RoomItem).filter(RoomItem.floor, RoomItem.room, RoomItem.type_, RoomItem.capacity, RoomItem.hours, RoomItem.accessibility, RoomItem.noise, RoomItem.lighting, RoomItem.whiteboard, RoomItem.outlets, RoomItem.food, RoomItem.washroom, RoomItem.parking, RoomItem.transit)
+    session.close()
+
+    return result 
+
+def sort_groups():
+    session = Session()
+    result = session.query(GroupItem.name, GroupItem.subject, GroupItem.course, GroupItem.meet_time, GroupItem.is_recurring, GroupItem.max_size, GroupItem.purpose, GroupItem.room)
+    session.close()
+    return result
+
+def print_rooms():
+    with Session() as session:
+        rooms = session.query(RoomItem).all()
+
+    data = [room.to_dict() for room in rooms]
+    json_data = json.dumps(data)
+
+    # Send an HTTP POST request to the server hosting the URL
+    url = '/items' #http://localhost:3000/
+    headers = {'Content-type': 'application/json'}
+    response = requests.post(url, headers=headers, data=json_data)
+
+    if response.status_code == 200:
+        print('Data posted successfully.')
+    else:
+        print(f'Error posting data: {response.content}')
+    return 
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
